@@ -14,15 +14,17 @@ import java.util.Set;
 public class Aeropuerto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_aeropuerto;
-    private String nombre_aeropuerto;
-    private String ciudad_aeropuerto;
-    private String pais_aeropuerto;
+    private Long idAeropuerto;
+    private String nombreAeropuerto;
+    private String ciudadAeropuerto;
+    private String paisAeropuerto;
 
-    @OneToMany(mappedBy = "aeropuerto_origen")
-    private Set<Vuelo> vuelo_origen;
-
-    @OneToMany(mappedBy = "aeropuerto_destino")
-    private Set<Vuelo> vuelo_destino;
-
+    public Aeropuerto actualizarCon(Aeropuerto aeropuerto) {
+        return new Aeropuerto(
+            this.idAeropuerto,
+            aeropuerto.nombreAeropuerto,
+            aeropuerto.ciudadAeropuerto,
+            aeropuerto.paisAeropuerto
+        );
+    }
 }

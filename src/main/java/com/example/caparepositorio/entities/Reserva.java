@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -19,8 +18,8 @@ import java.util.Set;
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_reserva;
-    private LocalDate fecha_reserva;
+    private Long idReserva;
+    private LocalDate fechaReserva;
 
     @OneToMany(mappedBy = "reserva")
     private Set<Pasajero> pasajeros;
@@ -31,4 +30,14 @@ public class Reserva {
 
     @ManyToMany(mappedBy = "reservas")
     private List<Vuelo> vuelos;
+
+    public Reserva actualizarCon(Reserva reserva) {
+        return new Reserva(
+            this.idReserva,
+            reserva.fechaReserva,
+            reserva.pasajeros,
+            reserva.cliente,
+            reserva.vuelos
+        );
+    }
 }

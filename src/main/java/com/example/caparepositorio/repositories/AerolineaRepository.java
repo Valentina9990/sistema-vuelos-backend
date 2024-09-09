@@ -2,5 +2,8 @@ package com.example.caparepositorio.repositories;
 import com.example.caparepositorio.entities.Aerolinea;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AerolineaRepository {
+import java.util.Optional;
+
+public interface AerolineaRepository extends JpaRepository<Aerolinea, Long> {
+    Optional<Aerolinea> findByCodigoAerolinea(String codigoAerolinea);
 }

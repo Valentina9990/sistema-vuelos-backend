@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,12 +14,22 @@ import java.util.Set;
 public class Pasajero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_pasajero;
-    private String nombre_pasajero;
-    private String apellido_pasajero;
-    private Integer documento_identidad_pasajero;
+    private Long idPasajero;
+    private String nombrePasajero;
+    private String apellidoPasajero;
+    private Integer documentoIdentidadPasajero;
 
     @ManyToOne
     @JoinColumn(name = "id_reserva")
     private Reserva reserva;
+
+    public Pasajero actualizarCon(Pasajero pasajero) {
+        return new Pasajero(
+            this.idPasajero,
+            pasajero.nombrePasajero,
+            pasajero.apellidoPasajero,
+            pasajero.documentoIdentidadPasajero,
+            pasajero.reserva
+        );
+    }
 }

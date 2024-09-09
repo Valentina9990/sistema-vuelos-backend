@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,12 +16,22 @@ import java.util.Set;
 public class Aerolinea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_aerolinea;
-    private String nombre_aerolinea;
-    private String codigo_aerolinea;
-    private String pais_origen_aerolinea;
+    private Long idAerolinea;
+    private String nombreAerolinea;
+    private String codigoAerolinea;
+    private String paisOrigenAerolinea;
 
     @OneToMany(mappedBy = "aerolinea")
     private Set<Vuelo> vuelos;
+
+    public Aerolinea actualizarCon(Aerolinea aerolinea) {
+        return new Aerolinea(
+            this.idAerolinea,
+            aerolinea.nombreAerolinea,
+            aerolinea.codigoAerolinea,
+            aerolinea.paisOrigenAerolinea,
+            aerolinea.vuelos
+        );
+    }
 
 }
