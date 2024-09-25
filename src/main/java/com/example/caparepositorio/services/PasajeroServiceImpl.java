@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PasajeroServiceImpl {
+public class PasajeroServiceImpl implements PasajeroService {
     private final PasajeroRepository pasajeroRepository;
 
     public PasajeroServiceImpl(PasajeroRepository pasajeroRepository) {

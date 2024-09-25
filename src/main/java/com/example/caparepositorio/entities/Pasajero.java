@@ -20,7 +20,7 @@ public class Pasajero {
     private Integer documentoIdentidadPasajero;
 
     @ManyToOne
-    @JoinColumn(name = "id_reserva")
+    @JoinColumn(name = "idReserva")
     private Reserva reserva;
 
     public Pasajero actualizarCon(Pasajero pasajero) {

@@ -25,7 +25,7 @@ public class Reserva {
     private Set<Pasajero> pasajeros;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
+    @JoinColumn(name = "idCliente")
     private Cliente cliente;
 
     @ManyToMany(mappedBy = "reservas")

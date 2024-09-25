@@ -25,23 +25,21 @@ public class Vuelo {
     private Long capacidadVuelo;
 
     @ManyToOne
-    @JoinColumn(name = "id_aerolinea", referencedColumnName = "id_aerolinea")
+    @JoinColumn(name = "idAerolinea")
     private Aerolinea aerolinea;
 
     @ManyToOne
-    @JoinColumn(name = "id_aeropuerto_origen", referencedColumnName = "id_aeropuerto")
+    @JoinColumn(name = "idAeropuertoOrigen", referencedColumnName = "idAeropuerto")
     private Aeropuerto aeropuertoOrigen;
 
     @ManyToOne
-    @JoinColumn(name = "id_aeropuerto_destino", referencedColumnName = "id_aeropuerto")
+    @JoinColumn(name = "idAeropuertoDestino", referencedColumnName = "idAeropuerto")
     private Aeropuerto aeropuertoDestino;
 
     @ManyToMany
     @JoinTable(name="rutas",
-            joinColumns= @JoinColumn( name="id_vuelo",
-                    referencedColumnName="id_vuelo"),
-            inverseJoinColumns=@JoinColumn( name="id_reserva",
-                    referencedColumnName="id_reserva"))
+            joinColumns= @JoinColumn( name="idVuelo"),
+            inverseJoinColumns=@JoinColumn( name="idReserva"))
     private List<Reserva> reservas;
 
     public Vuelo actualizarCon(Vuelo vuelo) {
