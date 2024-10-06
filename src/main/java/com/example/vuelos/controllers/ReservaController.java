@@ -1,7 +1,6 @@
 package com.example.vuelos.controllers;
 
 import com.example.vuelos.dtos.ReservaDTO;
-import com.example.vuelos.entities.Reserva;
 import com.example.vuelos.services.ReservaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

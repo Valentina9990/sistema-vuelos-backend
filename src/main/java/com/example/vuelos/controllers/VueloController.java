@@ -1,7 +1,6 @@
 package com.example.vuelos.controllers;
 
 import com.example.vuelos.dtos.VueloDTO;
-import com.example.vuelos.entities.Vuelo;
 import com.example.vuelos.services.VueloService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,6 @@
 package com.example.vuelos.controllers;
 
 import com.example.vuelos.dtos.PasajeroDTO;
-import com.example.vuelos.entities.Pasajero;
 import com.example.vuelos.services.PasajeroService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

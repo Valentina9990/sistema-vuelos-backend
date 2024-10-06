@@ -1,7 +1,6 @@
 package com.example.vuelos.services;
 
 import com.example.vuelos.dtos.AerolineaDTO;
-import com.example.vuelos.entities.Aerolinea;
 
 import java.util.List;
 import java.util.Optional;
