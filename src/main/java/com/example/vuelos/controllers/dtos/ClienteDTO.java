@@ -1,4 +1,4 @@
-package com.example.vuelos.dtos;
+package com.example.vuelos.controllers.dtos;
 
 public record ClienteDTO (
     Long idCliente,
@@ -6,5 +6,6 @@ public record ClienteDTO (
     String apellidoCliente,
     String direccionCliente,
     String telefonoCliente,
+    String documentoIdentidad,
     String correoElectronicoCliente
 ){}

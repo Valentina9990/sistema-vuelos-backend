@@ -1,6 +1,7 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.dtos.PasajeroDTO;
+import com.example.vuelos.controllers.dtos.PasajeroDTO;
+import com.example.vuelos.controllers.dtos.PasajeroRequestDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,11 +11,11 @@ public interface PasajeroService {
 
     Optional<PasajeroDTO> findById(Long id);
 
-    PasajeroDTO create(PasajeroDTO pasajeroDTO);
+    PasajeroDTO create(PasajeroRequestDTO pasajeroRequestDTO);
 
-    Optional<PasajeroDTO> update(Long id, PasajeroDTO pasajeroToUpdateDTO);
+    Optional<PasajeroDTO> update(Long id, PasajeroRequestDTO pasajeroRequestDTO);
 
     void delete(Long id);
 
-    Optional<PasajeroDTO> findByDocumentoIdentidad(Integer documentoIdentidad);
+    Optional<PasajeroDTO> findByDocumentoIdentidad(String documentoIdentidad);
 }

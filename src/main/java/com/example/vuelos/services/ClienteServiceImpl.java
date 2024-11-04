@@ -1,7 +1,9 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.dtos.ClienteDTO;
-import com.example.vuelos.dtos.ClienteMapper;
+import com.example.vuelos.controllers.dtos.ClienteDTO;
+import com.example.vuelos.controllers.dtos.ClienteMapper;
+import com.example.vuelos.controllers.dtos.ClienteRequestDTO;
+import com.example.vuelos.controllers.dtos.PasajeroDTO;
 import com.example.vuelos.entities.Cliente;
 import com.example.vuelos.repositories.ClienteRepository;
 import org.springframework.stereotype.Service;
@@ -34,19 +36,17 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteDTO create(ClienteDTO clienteDTO) {
-        Cliente cliente = clienteMapper.toCliente(clienteDTO);
+    public ClienteDTO create(ClienteRequestDTO clienteRequestDTO) {
+        Cliente cliente = clienteMapper.toCliente(clienteRequestDTO);
         Cliente savedCliente = clienteRepository.save(cliente);
         return clienteMapper.toClienteDTO(savedCliente);
     }
 
-
     @Override
-    public Optional<ClienteDTO> update(Long id, ClienteDTO clienteToUpdate) {
+    public Optional<ClienteDTO> update(Long id, ClienteRequestDTO clienteRequestDTO) {
         return clienteRepository.findById(id).map(cliente -> {
-            Cliente updatedCliente = clienteMapper.toCliente(clienteToUpdate);
-            updatedCliente.setIdCliente(id);
-            return clienteMapper.toClienteDTO(clienteRepository.save(updatedCliente));
+            clienteMapper.updateClienteFromRequestDTO(clienteRequestDTO, cliente);
+            return clienteMapper.toClienteDTO(clienteRepository.save(cliente));
         });
     }
 
@@ -58,6 +58,12 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Optional<ClienteDTO> findBynombre(String nombre) {
         return clienteRepository.findByNombreCliente(nombre)
+                .map(clienteMapper::toClienteDTO);
+    }
+
+    @Override
+    public Optional<ClienteDTO> findByDocumentoIdentidad(String documentoIdentidad) {
+        return clienteRepository.findByDocumentoIdentidad(documentoIdentidad)
                 .map(clienteMapper::toClienteDTO);
     }
 }

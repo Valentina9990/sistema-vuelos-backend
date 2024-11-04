@@ -1,4 +1,4 @@
-package com.example.vuelos.dtos;
+package com.example.vuelos.controllers.dtos;
 
 public record AeropuertoDTO(
         Long idAeropuerto,

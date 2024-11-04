@@ -24,14 +24,4 @@ public class Aerolinea {
     @OneToMany(mappedBy = "aerolinea")
     private Set<Vuelo> vuelos;
 
-    public Aerolinea actualizarCon(Aerolinea aerolinea) {
-        return new Aerolinea(
-            this.idAerolinea,
-            aerolinea.nombreAerolinea,
-            aerolinea.codigoAerolinea,
-            aerolinea.paisOrigenAerolinea,
-            aerolinea.vuelos
-        );
-    }
-
 }

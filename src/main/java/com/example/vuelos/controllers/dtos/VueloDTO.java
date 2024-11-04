@@ -1,4 +1,4 @@
-package com.example.vuelos.dtos;
+package com.example.vuelos.controllers.dtos;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

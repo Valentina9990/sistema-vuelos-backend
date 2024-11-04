@@ -1,7 +1,8 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.dtos.ReservaDTO;
-import com.example.vuelos.dtos.ReservaMapper;
+import com.example.vuelos.controllers.dtos.ReservaDTO;
+import com.example.vuelos.controllers.dtos.ReservaMapper;
+import com.example.vuelos.controllers.dtos.ReservaRequestDTO;
 import com.example.vuelos.entities.Reserva;
 import com.example.vuelos.repositories.ReservaRepository;
 import org.springframework.stereotype.Service;
@@ -32,18 +33,17 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public ReservaDTO create(ReservaDTO reservaDTO) {
-        Reserva reserva = reservaMapper.toReserva(reservaDTO);
+    public ReservaDTO create(ReservaRequestDTO reservaRequestDTO) {
+        Reserva reserva = reservaMapper.toReserva(reservaRequestDTO);
         Reserva savedReserva = reservaRepository.save(reserva);
         return reservaMapper.toReservaDTO(savedReserva);
     }
 
     @Override
-    public Optional<ReservaDTO> update(Long id, ReservaDTO reservaToUpdateDTO) {
+    public Optional<ReservaDTO> update(Long id, ReservaRequestDTO reservaRequestDTO) {
         return reservaRepository.findById(id).map(reserva -> {
-            Reserva updatedReserva = reserva.actualizarCon(reservaMapper.toReserva(reservaToUpdateDTO));
-            Reserva savedReserva = reservaRepository.save(updatedReserva);
-            return reservaMapper.toReservaDTO(savedReserva);
+            reservaMapper.updateReservaFromRequestDTO(reservaRequestDTO, reserva);
+            return reservaMapper.toReservaDTO(reservaRepository.save(reserva));
         });
     }
 

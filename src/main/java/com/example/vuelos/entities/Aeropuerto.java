@@ -17,12 +17,4 @@ public class Aeropuerto {
     private String ciudadAeropuerto;
     private String paisAeropuerto;
 
-    public Aeropuerto actualizarCon(Aeropuerto aeropuerto) {
-        return new Aeropuerto(
-            this.idAeropuerto,
-            aeropuerto.nombreAeropuerto,
-            aeropuerto.ciudadAeropuerto,
-            aeropuerto.paisAeropuerto
-        );
-    }
 }

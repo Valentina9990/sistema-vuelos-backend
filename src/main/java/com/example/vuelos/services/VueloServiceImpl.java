@@ -1,7 +1,8 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.dtos.VueloDTO;
-import com.example.vuelos.dtos.VueloMapper;
+import com.example.vuelos.controllers.dtos.VueloDTO;
+import com.example.vuelos.controllers.dtos.VueloMapper;
+import com.example.vuelos.controllers.dtos.VueloRequestDTO;
 import com.example.vuelos.entities.Vuelo;
 import com.example.vuelos.repositories.VueloRepository;
 import org.springframework.stereotype.Service;
@@ -32,18 +33,17 @@ public class VueloServiceImpl implements VueloService {
     }
 
     @Override
-    public VueloDTO create(VueloDTO vueloDTO) {
-        Vuelo vuelo = vueloMapper.toVuelo(vueloDTO);
+    public VueloDTO create(VueloRequestDTO vueloRequestDTO) {
+        Vuelo vuelo = vueloMapper.toVuelo(vueloRequestDTO);
         Vuelo savedVuelo = vueloRepository.save(vuelo);
         return vueloMapper.toVueloDTO(savedVuelo);
     }
 
     @Override
-    public Optional<VueloDTO> update(Long id, VueloDTO vueloToUpdateDTO) {
+    public Optional<VueloDTO> update(Long id, VueloRequestDTO vueloRequestDTO) {
         return vueloRepository.findById(id).map(vuelo -> {
-            Vuelo updatedVuelo = vuelo.actualizarCon(vueloMapper.toVuelo(vueloToUpdateDTO));
-            Vuelo savedVuelo = vueloRepository.save(updatedVuelo);
-            return vueloMapper.toVueloDTO(savedVuelo);
+            vueloMapper.updateVueloFromRequestDTO(vueloRequestDTO, vuelo);
+            return vueloMapper.toVueloDTO(vueloRepository.save(vuelo));
         });
     }
 

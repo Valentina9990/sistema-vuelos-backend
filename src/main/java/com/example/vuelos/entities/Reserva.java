@@ -31,13 +31,4 @@ public class Reserva {
     @ManyToMany(mappedBy = "reservas")
     private List<Vuelo> vuelos;
 
-    public Reserva actualizarCon(Reserva reserva) {
-        return new Reserva(
-            this.idReserva,
-            reserva.fechaReserva,
-            reserva.pasajeros,
-            reserva.cliente,
-            reserva.vuelos
-        );
-    }
 }

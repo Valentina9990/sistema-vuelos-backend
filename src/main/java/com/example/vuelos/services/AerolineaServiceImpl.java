@@ -1,7 +1,8 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.dtos.AerolineaDTO;
-import com.example.vuelos.dtos.AerolineaMapper;
+import com.example.vuelos.controllers.dtos.AerolineaDTO;
+import com.example.vuelos.controllers.dtos.AerolineaMapper;
+import com.example.vuelos.controllers.dtos.AerolineaRequestDTO;
 import com.example.vuelos.entities.Aerolinea;
 import com.example.vuelos.repositories.AerolineaRepository;
 import org.springframework.stereotype.Service;
@@ -32,18 +33,17 @@ public class AerolineaServiceImpl implements AerolineaService {
     }
 
     @Override
-    public AerolineaDTO create(AerolineaDTO aerolineaDTO) {
-        Aerolinea aerolinea = aerolineaMapper.toAerolinea(aerolineaDTO);
+    public AerolineaDTO create(AerolineaRequestDTO aerolineaRequestDTO) {
+        Aerolinea aerolinea = aerolineaMapper.toAerolinea(aerolineaRequestDTO);
         Aerolinea savedAerolinea = aerolineaRepository.save(aerolinea);
         return aerolineaMapper.toAerolineaDTO(savedAerolinea);
     }
 
     @Override
-    public Optional<AerolineaDTO> update(Long id, AerolineaDTO aerolineaToUpdateDTO) {
+    public Optional<AerolineaDTO> update(Long id, AerolineaRequestDTO aerolineaRequestDTO) {
         return aerolineaRepository.findById(id).map(aerolinea -> {
-            Aerolinea updatedAerolinea = aerolinea.actualizarCon(aerolineaMapper.toAerolinea(aerolineaToUpdateDTO));
-            Aerolinea savedAerolinea = aerolineaRepository.save(updatedAerolinea);
-            return aerolineaMapper.toAerolineaDTO(savedAerolinea);
+            aerolineaMapper.updateAerolineaFromRequestDTO(aerolineaRequestDTO, aerolinea);
+            return aerolineaMapper.toAerolineaDTO(aerolineaRepository.save(aerolinea));
         });
     }
 
