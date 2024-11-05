@@ -1,7 +1,7 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.dtos.AeropuertoDTO;
-import com.example.vuelos.entities.Aeropuerto;
+import com.example.vuelos.controllers.dtos.AeropuertoDTO;
+import com.example.vuelos.controllers.dtos.AeropuertoRequestDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +11,9 @@ public interface AeropuertoService {
 
     Optional<AeropuertoDTO> findById(Long id);
 
-    AeropuertoDTO create(AeropuertoDTO aeropuertoDTO);
+    AeropuertoDTO create(AeropuertoRequestDTO aeropuertoRequestDTO);
 
-    Optional<AeropuertoDTO> update(Long id, AeropuertoDTO aeropuertoToUpdateDTO);
+    Optional<AeropuertoDTO> update(Long id, AeropuertoRequestDTO aeropuertoRequestDTO);
 
     void delete(Long id);
 

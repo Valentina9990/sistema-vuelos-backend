@@ -1,8 +1,7 @@
-package com.example.vuelos.dtos;
+package com.example.vuelos.controllers.dtos;
 
-public record AerolineaDTO(
-        Long idAerolinea,
+public record AerolineaRequestDTO(
         String nombreAerolinea,
         String codigoAerolinea,
         String paisOrigenAerolinea
-) {}
+) { }

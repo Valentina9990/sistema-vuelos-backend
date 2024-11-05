@@ -1,6 +1,7 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.dtos.AerolineaDTO;
+import com.example.vuelos.controllers.dtos.AerolineaDTO;
+import com.example.vuelos.controllers.dtos.AerolineaRequestDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,9 +11,9 @@ public interface AerolineaService {
 
     Optional<AerolineaDTO> findById(Long id);
 
-    AerolineaDTO create(AerolineaDTO aerolineaDTO);
+    AerolineaDTO create(AerolineaRequestDTO aerolineaRequestDTO);
 
-    Optional<AerolineaDTO> update(Long id, AerolineaDTO aerolineaToUpdateDTO);
+    Optional<AerolineaDTO> update(Long id, AerolineaRequestDTO aerolineaRequestDTO);
 
     void delete(Long id);
 

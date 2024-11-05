@@ -1,4 +1,5 @@
-package com.example.vuelos.dtos;
+package com.example.vuelos.controllers.dtos;
+import com.example.vuelos.entities.Reserva;
 import com.example.vuelos.entities.Vuelo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -10,4 +11,8 @@ public interface VueloMapper {
     VueloDTO toVueloDTO(Vuelo vuelo);
 
     Vuelo toVuelo(VueloDTO vueloDTO);
+
+    Vuelo toVuelo(VueloRequestDTO vueloRequestDTO);
+
+    void updateVueloFromRequestDTO(VueloRequestDTO VueloRequestDTO, Vuelo vuelo);
 }

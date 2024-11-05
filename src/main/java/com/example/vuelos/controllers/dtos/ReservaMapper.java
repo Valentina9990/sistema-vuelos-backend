@@ -1,4 +1,4 @@
-package com.example.vuelos.dtos;
+package com.example.vuelos.controllers.dtos;
 import com.example.vuelos.entities.Reserva;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -10,5 +10,9 @@ public interface ReservaMapper {
     ReservaDTO toReservaDTO(Reserva reserva);
 
     Reserva toReserva(ReservaDTO reservaDTO);
+
+    Reserva toReserva(ReservaRequestDTO reservaRequestDTO);
+
+    void updateReservaFromRequestDTO(ReservaRequestDTO ReservaRequestDTO, Reserva reserva);
 }
 
