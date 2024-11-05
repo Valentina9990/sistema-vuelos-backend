@@ -1,9 +1,9 @@
-package com.example.vuelos.dtos;
+package com.example.vuelos.controllers.dtos;
 
 public record PasajeroDTO(
         Long idPasajero,
         String nombrePasajero,
         String apellidoPasajero,
-        Integer documentoIdentidadPasajero,
+        String documentoIdentidadPasajero,
         Long reservaId
 ) {}

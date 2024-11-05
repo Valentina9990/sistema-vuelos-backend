@@ -1,7 +1,8 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.dtos.AeropuertoDTO;
-import com.example.vuelos.dtos.AeropuertoMapper;
+import com.example.vuelos.controllers.dtos.AeropuertoDTO;
+import com.example.vuelos.controllers.dtos.AeropuertoMapper;
+import com.example.vuelos.controllers.dtos.AeropuertoRequestDTO;
 import com.example.vuelos.entities.Aeropuerto;
 import com.example.vuelos.repositories.AeropuertoRepository;
 import org.springframework.stereotype.Service;
@@ -33,18 +34,17 @@ public class AeropuertoServiceImpl implements AeropuertoService {
     }
 
     @Override
-    public AeropuertoDTO create(AeropuertoDTO aeropuertoDTO) {
-        Aeropuerto aeropuerto = aeropuertoMapper.toAeropuerto(aeropuertoDTO);
+    public AeropuertoDTO create(AeropuertoRequestDTO aeropuertoRequestDTO) {
+        Aeropuerto aeropuerto = aeropuertoMapper.toAeropuerto(aeropuertoRequestDTO);
         Aeropuerto savedAeropuerto = aeropuertoRepository.save(aeropuerto);
         return aeropuertoMapper.toAeropuertoDTO(savedAeropuerto);
     }
 
     @Override
-    public Optional<AeropuertoDTO> update(Long id, AeropuertoDTO aeropuertoToUpdateDTO) {
+    public Optional<AeropuertoDTO> update(Long id, AeropuertoRequestDTO aeropuertoRequestDTO) {
         return aeropuertoRepository.findById(id).map(aeropuerto -> {
-            Aeropuerto updatedAeropuerto = aeropuerto.actualizarCon(aeropuertoMapper.toAeropuerto(aeropuertoToUpdateDTO));
-            Aeropuerto savedAeropuerto = aeropuertoRepository.save(updatedAeropuerto);
-            return aeropuertoMapper.toAeropuertoDTO(savedAeropuerto);
+            aeropuertoMapper.updateAeropuertoFromRequestDTO(aeropuertoRequestDTO, aeropuerto);
+            return aeropuertoMapper.toAeropuertoDTO(aeropuertoRepository.save(aeropuerto));
         });
     }
 

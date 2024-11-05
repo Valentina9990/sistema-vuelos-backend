@@ -42,17 +42,4 @@ public class Vuelo {
             inverseJoinColumns=@JoinColumn( name="idReserva"))
     private List<Reserva> reservas;
 
-    public Vuelo actualizarCon(Vuelo vuelo) {
-        return new Vuelo(
-            this.idVuelo,
-            vuelo.fechaSalidaVuelo,
-            vuelo.horaSalidaVuelo,
-            vuelo.duracionMinutosVuelo,
-            vuelo.capacidadVuelo,
-            vuelo.aerolinea,
-            vuelo.aeropuertoOrigen,
-            vuelo.aeropuertoDestino,
-            vuelo.reservas
-        );
-    }
 }

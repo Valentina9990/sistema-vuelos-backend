@@ -1,8 +1,10 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.dtos.PasajeroDTO;
-import com.example.vuelos.dtos.PasajeroMapper;
+import com.example.vuelos.controllers.dtos.PasajeroDTO;
+import com.example.vuelos.controllers.dtos.PasajeroMapper;
+import com.example.vuelos.controllers.dtos.PasajeroRequestDTO;
 import com.example.vuelos.entities.Pasajero;
+import com.example.vuelos.exceptions.DuplicateDocumentException;
 import com.example.vuelos.repositories.PasajeroRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,18 +34,29 @@ public class PasajeroServiceImpl implements PasajeroService {
     }
 
     @Override
-    public PasajeroDTO create(PasajeroDTO pasajeroDTO) {
-        Pasajero pasajero = pasajeroMapper.toPasajero(pasajeroDTO);
+    public PasajeroDTO create(PasajeroRequestDTO pasajeroRequestDTO) {
+        pasajeroRepository.findByDocumentoIdentidadPasajero(pasajeroRequestDTO.documentoIdentidadPasajero())
+                .ifPresent(pasajero -> {
+                    throw new DuplicateDocumentException("Ya existe un pasajero con el documento de identidad: "
+                            + pasajeroRequestDTO.documentoIdentidadPasajero());
+                });
+        Pasajero pasajero = pasajeroMapper.toPasajero(pasajeroRequestDTO);
         Pasajero savedPasajero = pasajeroRepository.save(pasajero);
         return pasajeroMapper.toPasajeroDTO(savedPasajero);
     }
 
     @Override
-    public Optional<PasajeroDTO> update(Long id, PasajeroDTO pasajeroToUpdateDTO) {
+    public Optional<PasajeroDTO> update(Long id, PasajeroRequestDTO pasajeroRequestDTO) {
         return pasajeroRepository.findById(id).map(pasajero -> {
-            Pasajero updatedPasajero = pasajero.actualizarCon(pasajeroMapper.toPasajero(pasajeroToUpdateDTO));
-            Pasajero savedPasajero = pasajeroRepository.save(updatedPasajero);
-            return pasajeroMapper.toPasajeroDTO(savedPasajero);
+            pasajeroRepository.findByDocumentoIdentidadPasajero(pasajeroRequestDTO.documentoIdentidadPasajero())
+                    .ifPresent(existingPasajero -> {
+                        if (!existingPasajero.getIdPasajero().equals(id)) {
+                            throw new DuplicateDocumentException("Ya existe otro pasajero con el documento de identidad: "
+                                    + pasajeroRequestDTO.documentoIdentidadPasajero());
+                        }
+                    });
+            pasajeroMapper.updatePasajeroFromRequestDTO(pasajeroRequestDTO, pasajero);
+            return pasajeroMapper.toPasajeroDTO(pasajeroRepository.save(pasajero));
         });
     }
 
@@ -53,7 +66,7 @@ public class PasajeroServiceImpl implements PasajeroService {
     }
 
     @Override
-    public Optional<PasajeroDTO> findByDocumentoIdentidad(Integer documentoIdentidad) {
+    public Optional<PasajeroDTO> findByDocumentoIdentidad(String documentoIdentidad) {
         return pasajeroRepository.findByDocumentoIdentidadPasajero(documentoIdentidad)
                 .map(pasajeroMapper::toPasajeroDTO);
     }

@@ -1,6 +1,8 @@
 package com.example.vuelos.controllers;
 
-import com.example.vuelos.dtos.PasajeroDTO;
+import com.example.vuelos.controllers.dtos.PasajeroDTO;
+import com.example.vuelos.controllers.dtos.PasajeroRequestDTO;
+import com.example.vuelos.exceptions.ResourceNotFound;
 import com.example.vuelos.services.PasajeroService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,25 +25,26 @@ public class PasajeroController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PasajeroDTO> getPasajeroById(@PathVariable Long id) {
-        return pasajeroService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(pasajeroService.findById(id)
+                .orElseThrow(() -> new ResourceNotFound("Pasajero no encontrado con id: " + id)));
     }
 
     @PostMapping
-    public ResponseEntity<PasajeroDTO> createPasajero(@RequestBody PasajeroDTO pasajeroDTO) {
-        return ResponseEntity.ok(pasajeroService.create(pasajeroDTO));
+    public ResponseEntity<PasajeroDTO> createPasajero(@RequestBody PasajeroRequestDTO pasajeroRequestDTO) {
+        return ResponseEntity.ok(pasajeroService.create(pasajeroRequestDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PasajeroDTO> updatePasajero(@RequestBody PasajeroDTO pasajeroToUpdateDTO, @PathVariable Long id) {
-        return pasajeroService.update(id, pasajeroToUpdateDTO)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<PasajeroDTO> updatePasajero(@RequestBody PasajeroRequestDTO pasajeroRequestDTO, @PathVariable Long id) {
+        return ResponseEntity.ok(pasajeroService.update(id, pasajeroRequestDTO)
+                .orElseThrow(() -> new ResourceNotFound("Pasajero no encontrado con id: " + id)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePasajero(@PathVariable Long id) {
+        if (!pasajeroService.findById(id).isPresent()) {
+            throw new ResourceNotFound("Pasajero no encontrado con id: " + id);
+        }
         pasajeroService.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -19,20 +19,10 @@ public class Cliente {
     private String apellidoCliente;
     private String direccionCliente;
     private String telefonoCliente;
+    @Column(unique = true)
+    private String documentoIdentidad;
     private String correoElectronicoCliente;
 
     @OneToOne(mappedBy = "cliente")
     private Reserva reserva;
-
-    public Cliente actualizarCon(Cliente cliente) {
-        return new Cliente(
-            this.idCliente,
-            cliente.nombreCliente,
-            cliente.apellidoCliente,
-            cliente.direccionCliente,
-            cliente.telefonoCliente,
-            cliente.correoElectronicoCliente,
-            cliente.reserva
-        );
-    }
 }

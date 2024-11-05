@@ -17,19 +17,10 @@ public class Pasajero {
     private Long idPasajero;
     private String nombrePasajero;
     private String apellidoPasajero;
-    private Integer documentoIdentidadPasajero;
+    @Column(unique = true)
+    private String documentoIdentidadPasajero;
 
     @ManyToOne
     @JoinColumn(name = "idReserva")
     private Reserva reserva;
-
-    public Pasajero actualizarCon(Pasajero pasajero) {
-        return new Pasajero(
-            this.idPasajero,
-            pasajero.nombrePasajero,
-            pasajero.apellidoPasajero,
-            pasajero.documentoIdentidadPasajero,
-            pasajero.reserva
-        );
-    }
 }

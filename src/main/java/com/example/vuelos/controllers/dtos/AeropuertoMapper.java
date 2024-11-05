@@ -1,4 +1,5 @@
-package com.example.vuelos.dtos;
+package com.example.vuelos.controllers.dtos;
+import com.example.vuelos.entities.Aerolinea;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import com.example.vuelos.entities.Aeropuerto;
@@ -10,5 +11,8 @@ public interface AeropuertoMapper {
     AeropuertoDTO toAeropuertoDTO(Aeropuerto aeropuerto);
 
     Aeropuerto toAeropuerto(AeropuertoDTO aeropuertoDTO);
-}
 
+    Aeropuerto toAeropuerto(AeropuertoRequestDTO aeropuertoRequestDTO);
+
+    void updateAeropuertoFromRequestDTO(AeropuertoRequestDTO aeropuertoRequestDTO, Aeropuerto aeropuerto);
+}
