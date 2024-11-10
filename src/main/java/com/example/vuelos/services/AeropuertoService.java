@@ -2,6 +2,7 @@ package com.example.vuelos.services;
 
 import com.example.vuelos.controllers.dtos.AeropuertoDTO;
 import com.example.vuelos.controllers.dtos.AeropuertoRequestDTO;
+import com.example.vuelos.entities.Aeropuerto;
 
 import java.util.List;
 import java.util.Optional;

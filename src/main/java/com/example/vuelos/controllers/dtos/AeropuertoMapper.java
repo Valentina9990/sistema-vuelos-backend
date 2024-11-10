@@ -13,6 +13,4 @@ public interface AeropuertoMapper {
     Aeropuerto toAeropuerto(AeropuertoDTO aeropuertoDTO);
 
     Aeropuerto toAeropuerto(AeropuertoRequestDTO aeropuertoRequestDTO);
-
-    void updateAeropuertoFromRequestDTO(AeropuertoRequestDTO aeropuertoRequestDTO, Aeropuerto aeropuerto);
 }

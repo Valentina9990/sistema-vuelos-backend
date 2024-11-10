@@ -41,10 +41,7 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public Optional<ReservaDTO> update(Long id, ReservaRequestDTO reservaRequestDTO) {
-        return reservaRepository.findById(id).map(reserva -> {
-            reservaMapper.updateReservaFromRequestDTO(reservaRequestDTO, reserva);
-            return reservaMapper.toReservaDTO(reservaRepository.save(reserva));
-        });
+        return reservaRepository.findById(id).map(reserva -> reservaMapper.toReservaDTO(reservaRepository.save(reserva)));
     }
 
     @Override

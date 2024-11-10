@@ -13,6 +13,4 @@ public interface VueloMapper {
     Vuelo toVuelo(VueloDTO vueloDTO);
 
     Vuelo toVuelo(VueloRequestDTO vueloRequestDTO);
-
-    void updateVueloFromRequestDTO(VueloRequestDTO VueloRequestDTO, Vuelo vuelo);
 }

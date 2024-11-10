@@ -14,6 +14,4 @@ public interface AerolineaMapper {
     Aerolinea toAerolinea(AerolineaDTO aerolineaDTO);
 
     Aerolinea toAerolinea(AerolineaRequestDTO aerolineaRequestDTO);
-
-    void updateAerolineaFromRequestDTO(AerolineaRequestDTO aerolineaRequestDTO, Aerolinea aerolinea);
 }
