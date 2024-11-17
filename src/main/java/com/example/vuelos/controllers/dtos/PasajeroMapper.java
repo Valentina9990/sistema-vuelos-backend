@@ -13,6 +13,4 @@ public interface PasajeroMapper {
     Pasajero toPasajero(PasajeroDTO pasajeroDTO);
 
     Pasajero toPasajero(PasajeroRequestDTO pasajeroRequestDTO);
-
-    void updatePasajeroFromRequestDTO(PasajeroRequestDTO pasajeroRequestDTO, Pasajero pasajero);
 }

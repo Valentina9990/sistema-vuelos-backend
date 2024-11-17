@@ -41,10 +41,7 @@ public class VueloServiceImpl implements VueloService {
 
     @Override
     public Optional<VueloDTO> update(Long id, VueloRequestDTO vueloRequestDTO) {
-        return vueloRepository.findById(id).map(vuelo -> {
-            vueloMapper.updateVueloFromRequestDTO(vueloRequestDTO, vuelo);
-            return vueloMapper.toVueloDTO(vueloRepository.save(vuelo));
-        });
+        return vueloRepository.findById(id).map(vuelo -> vueloMapper.toVueloDTO(vueloRepository.save(vuelo)));
     }
 
     @Override

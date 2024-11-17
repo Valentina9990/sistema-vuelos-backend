@@ -12,7 +12,5 @@ public interface ReservaMapper {
     Reserva toReserva(ReservaDTO reservaDTO);
 
     Reserva toReserva(ReservaRequestDTO reservaRequestDTO);
-
-    void updateReservaFromRequestDTO(ReservaRequestDTO ReservaRequestDTO, Reserva reserva);
 }
 

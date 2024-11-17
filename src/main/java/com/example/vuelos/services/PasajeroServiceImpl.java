@@ -55,7 +55,6 @@ public class PasajeroServiceImpl implements PasajeroService {
                                     + pasajeroRequestDTO.documentoIdentidadPasajero());
                         }
                     });
-            pasajeroMapper.updatePasajeroFromRequestDTO(pasajeroRequestDTO, pasajero);
             return pasajeroMapper.toPasajeroDTO(pasajeroRepository.save(pasajero));
         });
     }

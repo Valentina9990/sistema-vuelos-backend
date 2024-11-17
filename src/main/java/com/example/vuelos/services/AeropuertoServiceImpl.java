@@ -42,10 +42,7 @@ public class AeropuertoServiceImpl implements AeropuertoService {
 
     @Override
     public Optional<AeropuertoDTO> update(Long id, AeropuertoRequestDTO aeropuertoRequestDTO) {
-        return aeropuertoRepository.findById(id).map(aeropuerto -> {
-            aeropuertoMapper.updateAeropuertoFromRequestDTO(aeropuertoRequestDTO, aeropuerto);
-            return aeropuertoMapper.toAeropuertoDTO(aeropuertoRepository.save(aeropuerto));
-        });
+        return aeropuertoRepository.findById(id).map(aeropuerto -> aeropuertoMapper.toAeropuertoDTO(aeropuertoRepository.save(aeropuerto)));
     }
 
     public void delete(Long id) {
