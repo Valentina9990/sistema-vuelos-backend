@@ -21,7 +21,10 @@ public class User {
     private Long id;
     private String username;
     private String password;
+
+    @Column(unique = true)
     private String email;
+
     @ManyToMany
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),

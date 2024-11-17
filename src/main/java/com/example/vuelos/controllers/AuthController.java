@@ -7,6 +7,7 @@ import com.example.vuelos.entities.User;
 import com.example.vuelos.repositories.UserRepository;
 import com.example.vuelos.security.services.UserDetailsImpl;
 import com.example.vuelos.security.services.jwt.JwtUtil;
+import com.example.vuelos.services.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,12 +28,14 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     UserRepository userRepository;
+    private final AuthService authService;
 
-    public AuthController(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserRepository userRepository) {
+    public AuthController(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserRepository userRepository, AuthService authService) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
+        this.authService = authService;
     }
 
     @PostMapping("/login")
@@ -50,13 +53,8 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignupRequest signupRequest) {
-        User user = new User(null,
-                signupRequest.username(),
-                passwordEncoder.encode(signupRequest.password()),
-                signupRequest.email(),
-                new HashSet<>());
-        User newUser = userRepository.save(user);
+    public ResponseEntity<User> registerUser(@RequestBody SignupRequest signupRequest) {
+        User newUser = authService.registerUser(signupRequest.username(), signupRequest.password(), signupRequest.email());
         return ResponseEntity.ok(newUser);
     }
 }
