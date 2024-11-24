@@ -24,6 +24,7 @@ public class Vuelo {
     private LocalTime horaSalidaVuelo;
     private Long duracionMinutosVuelo;
     private Long capacidadVuelo;
+    private Float precioVuelo;
 
     @JsonIgnore
     @ManyToOne

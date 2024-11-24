@@ -15,6 +15,7 @@ public interface VueloRepository extends JpaRepository<Vuelo, Long> {
                     v.horaSalidaVuelo,
                     v.duracionMinutosVuelo,
                     v.capacidadVuelo,
+                    v.precioVuelo,
                     v.aerolinea,
                     v.aeropuertoOrigen,
                     v.aeropuertoDestino,
