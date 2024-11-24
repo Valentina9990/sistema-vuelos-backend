@@ -1,5 +1,6 @@
 package com.example.vuelos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,11 @@ public class Cliente {
     private String documentoIdentidad;
     private String correoElectronicoCliente;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "cliente")
     private Reserva reserva;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "cliente")
+    private User user;
 }
