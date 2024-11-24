@@ -1,5 +1,6 @@
 package com.example.vuelos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class Aerolinea {
     private String codigoAerolinea;
     private String paisOrigenAerolinea;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "aerolinea")
     private Set<Vuelo> vuelos;
-
 }

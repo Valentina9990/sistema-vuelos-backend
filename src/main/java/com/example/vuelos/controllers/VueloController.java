@@ -1,5 +1,6 @@
 package com.example.vuelos.controllers;
 
+import com.example.vuelos.controllers.dtos.VueloClientDTO;
 import com.example.vuelos.controllers.dtos.VueloDTO;
 import com.example.vuelos.controllers.dtos.VueloRequestDTO;
 import com.example.vuelos.exceptions.ResourceNotFound;
@@ -7,6 +8,7 @@ import com.example.vuelos.services.VueloService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -19,8 +21,15 @@ public class VueloController {
     }
 
     @GetMapping
-    public ResponseEntity<List<VueloDTO>> getVuelos() {
-        return ResponseEntity.ok(vueloService.findAll());
+    public ResponseEntity<List<VueloClientDTO>> getVuelos(
+            @RequestParam String origin,
+            @RequestParam String destination,
+            @RequestParam String date,
+            @RequestParam Integer passengers,
+            @RequestParam(required = false, defaultValue = "1") Integer page,
+            @RequestParam(required = false, defaultValue = "10") Integer size
+            ) {
+        return ResponseEntity.ok(vueloService.findAllByCriteria(origin, destination, date, passengers, page, size));
     }
 
     @GetMapping("/{id}")

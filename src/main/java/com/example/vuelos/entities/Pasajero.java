@@ -1,5 +1,6 @@
 package com.example.vuelos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Pasajero {
     @Column(unique = true)
     private String documentoIdentidadPasajero;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idReserva")
     private Reserva reserva;

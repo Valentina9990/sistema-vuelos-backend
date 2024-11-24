@@ -60,7 +60,8 @@ public class AuthServiceImpl implements AuthService {
                 username,
                 passwordEncoder.encode(password),
                 email,
-                new HashSet<>());
+                new HashSet<>(),
+                null);
 
         return userRepository.save(user);
     }

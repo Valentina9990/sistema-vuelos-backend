@@ -1,5 +1,6 @@
 package com.example.vuelos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,22 +25,25 @@ public class Vuelo {
     private Long duracionMinutosVuelo;
     private Long capacidadVuelo;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idAerolinea")
     private Aerolinea aerolinea;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idAeropuertoOrigen", referencedColumnName = "idAeropuerto")
     private Aeropuerto aeropuertoOrigen;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idAeropuertoDestino", referencedColumnName = "idAeropuerto")
     private Aeropuerto aeropuertoDestino;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name="rutas",
             joinColumns= @JoinColumn( name="idVuelo"),
             inverseJoinColumns=@JoinColumn( name="idReserva"))
     private List<Reserva> reservas;
-
 }
