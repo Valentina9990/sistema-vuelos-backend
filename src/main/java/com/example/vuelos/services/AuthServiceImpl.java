@@ -65,4 +65,10 @@ public class AuthServiceImpl implements AuthService {
 
         return userRepository.save(user);
     }
+
+    @Override
+    public User me() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepository.findByUsername(userDetails.getUsername()).orElseThrow();
+    }
 }

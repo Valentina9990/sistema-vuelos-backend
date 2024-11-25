@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface VueloRepository extends JpaRepository<Vuelo, Long> {
     @Query(value = """
@@ -34,4 +35,26 @@ public interface VueloRepository extends JpaRepository<Vuelo, Long> {
                 OFFSET :page
             """)
     List<VueloClientDTO> getFlightsByCriteria(String origin, String destination, LocalDate date, Integer page, Integer size);
+
+    @Query(value = """
+                SELECT new com.example.vuelos.controllers.dtos.VueloClientDTO(
+                    v.idVuelo,
+                    v.fechaSalidaVuelo,
+                    v.horaSalidaVuelo,
+                    v.duracionMinutosVuelo,
+                    v.capacidadVuelo,
+                    v.precioVuelo,
+                    v.aerolinea,
+                    v.aeropuertoOrigen,
+                    v.aeropuertoDestino,
+                    COUNT(p),
+                    COUNT(r)
+                )
+                FROM Vuelo v
+                LEFT JOIN v.reservas r
+                LEFT JOIN r.pasajeros p
+                WHERE v.idVuelo = :idVuelo
+                GROUP BY v.idVuelo, v.aeropuertoOrigen, v.aeropuertoDestino, v.aerolinea
+            """)
+    Optional<VueloClientDTO> findByIdVuelo(Long idVuelo);
 }

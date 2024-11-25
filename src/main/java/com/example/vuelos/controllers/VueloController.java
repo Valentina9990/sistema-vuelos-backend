@@ -33,7 +33,7 @@ public class VueloController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<VueloDTO> getVueloById(@PathVariable Long id) {
+    public ResponseEntity<VueloClientDTO> getVueloById(@PathVariable Long id) {
         return ResponseEntity.ok(vueloService.findById(id)
                 .orElseThrow(() -> new ResourceNotFound("Vuelo no encontrado con id: " + id)));
     }

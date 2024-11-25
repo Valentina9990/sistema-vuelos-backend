@@ -33,4 +33,9 @@ public class AuthController {
         User newUser = authService.registerUser(signupRequest.username(), signupRequest.password(), signupRequest.email());
         return ResponseEntity.ok(newUser);
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<User> me() {
+        return ResponseEntity.ok(authService.me());
+    }
 }

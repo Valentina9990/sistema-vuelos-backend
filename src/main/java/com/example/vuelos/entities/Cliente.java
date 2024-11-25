@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "clientes")
 @Data
@@ -25,8 +27,8 @@ public class Cliente {
     private String correoElectronicoCliente;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "cliente")
-    private Reserva reserva;
+    @OneToMany(mappedBy = "cliente")
+    private Set<Reserva> reservas;
 
     @JsonIgnore
     @OneToOne(mappedBy = "cliente")
