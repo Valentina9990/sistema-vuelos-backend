@@ -1,8 +1,6 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.controllers.dtos.AeropuertoDTO;
-import com.example.vuelos.controllers.dtos.AeropuertoMapper;
-import com.example.vuelos.controllers.dtos.AeropuertoRequestDTO;
+import com.example.vuelos.controllers.dtos.*;
 import com.example.vuelos.entities.Aeropuerto;
 import com.example.vuelos.repositories.AeropuertoRepository;
 import org.springframework.stereotype.Service;
@@ -42,7 +40,12 @@ public class AeropuertoServiceImpl implements AeropuertoService {
 
     @Override
     public Optional<AeropuertoDTO> update(Long id, AeropuertoRequestDTO aeropuertoRequestDTO) {
-        return aeropuertoRepository.findById(id).map(aeropuerto -> aeropuertoMapper.toAeropuertoDTO(aeropuertoRepository.save(aeropuerto)));
+        return aeropuertoRepository.findById(id)
+                .map(aeropuertoExistente -> {
+                    aeropuertoMapper.updateAeropuertoFromDTO(aeropuertoRequestDTO, aeropuertoExistente);
+                    Aeropuerto updatedAeropuerto = aeropuertoRepository.save(aeropuertoExistente);
+                    return aeropuertoMapper.toAeropuertoDTO(updatedAeropuerto);
+                });
     }
 
     public void delete(Long id) {
