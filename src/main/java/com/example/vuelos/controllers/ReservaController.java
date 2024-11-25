@@ -48,4 +48,9 @@ public class ReservaController {
         reservaService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/cliente/{idCliente}")
+    public ResponseEntity<List<ReservaDTO>> getReservasByClienteId(@PathVariable Long idCliente) {
+        return ResponseEntity.ok(reservaService.getReservasByClienteId(idCliente));
+    }
 }

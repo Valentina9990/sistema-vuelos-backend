@@ -28,7 +28,7 @@ public class Reserva {
 
     @JsonIgnore
     @OneToMany(mappedBy = "reserva")
-    private Set<Pasajero> pasajeros;
+    private List<Pasajero> pasajeros;
 
     @JsonIgnore
     @ManyToOne(optional = false)

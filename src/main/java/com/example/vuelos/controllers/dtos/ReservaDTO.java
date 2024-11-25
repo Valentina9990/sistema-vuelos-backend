@@ -1,12 +1,12 @@
 package com.example.vuelos.controllers.dtos;
+
 import java.time.LocalDate;
-import java.util.Set;
 import java.util.List;
 
 public record ReservaDTO(
         Long idReserva,
         LocalDate fechaReserva,
         Long clienteId,
-        Set<Long> pasajerosIds,
-        List<Long> vuelosIds
+        List<PasajeroDTO> pasajeros,
+        List<VueloDTO> vuelos
 ) {}

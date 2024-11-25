@@ -16,4 +16,6 @@ public interface ReservaService {
     Optional<ReservaDTO> update(Long id, ReservaRequestDTO reservaRequestDTO);
 
     void delete(Long id);
+
+    List<ReservaDTO> getReservasByClienteId(Long idCliente);
 }

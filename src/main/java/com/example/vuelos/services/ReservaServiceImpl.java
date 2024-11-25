@@ -79,4 +79,11 @@ public class ReservaServiceImpl implements ReservaService {
     public void delete(Long id) {
         reservaRepository.deleteById(id);
     }
+
+    @Override
+    public List<ReservaDTO> getReservasByClienteId(Long idCliente) {
+        return reservaRepository.getReservasByCliente_IdCliente(idCliente).stream()
+                .map(reservaMapper::toReservaDTO)
+                .toList();
+    }
 }
