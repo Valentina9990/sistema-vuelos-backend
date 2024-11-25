@@ -20,6 +20,11 @@ public class VueloController {
         this.vueloService = vueloService;
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<VueloDTO>> getAllVuelos() {
+        return ResponseEntity.ok(vueloService.findAll());
+    }
+
     @GetMapping
     public ResponseEntity<List<VueloClientDTO>> getVuelos(
             @RequestParam String origin,

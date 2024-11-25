@@ -8,6 +8,7 @@ public record VueloRequestDTO(
         LocalDate fechaSalidaVuelo,
         LocalTime horaSalidaVuelo,
         Long duracionMinutosVuelo,
+        Float precioVuelo,
         Long capacidadVuelo,
         Long aerolineaId,
         Long aeropuertoOrigenId,
