@@ -8,7 +8,7 @@ import com.example.vuelos.services.VueloService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+
 import java.util.List;
 
 @RestController
@@ -18,6 +18,11 @@ public class VueloController {
 
     public VueloController(VueloService vueloService) {
         this.vueloService = vueloService;
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<VueloDTO>> getAllVuelos() {
+        return ResponseEntity.ok(vueloService.findAll());
     }
 
     @GetMapping
