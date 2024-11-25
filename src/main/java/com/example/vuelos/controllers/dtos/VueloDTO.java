@@ -11,8 +11,8 @@ public record VueloDTO(
         Long duracionMinutosVuelo,
         Float precioVuelo,
         Long capacidadVuelo,
-        Long aerolineaId,
-        Long aeropuertoOrigenId,
-        Long aeropuertoDestinoId,
+        AerolineaDTO aerolinea,
+        AeropuertoDTO aeropuertoOrigen,
+        AeropuertoDTO aeropuertoDestino,
         List<Long> reservasIds
 ) {}
