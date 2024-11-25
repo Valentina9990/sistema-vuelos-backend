@@ -28,9 +28,8 @@ public class VueloServiceImpl implements VueloService {
     }
 
     @Override
-    public Optional<VueloDTO> findById(Long id) {
-        return vueloRepository.findById(id)
-                .map(vueloMapper::toVueloDTO);
+    public Optional<VueloClientDTO> findById(Long id) {
+        return vueloRepository.findByIdVuelo(id);
     }
 
     @Override

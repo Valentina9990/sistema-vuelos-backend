@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface VueloService {
     List<VueloDTO> findAll();
 
-    Optional<VueloDTO> findById(Long id);
+    Optional<VueloClientDTO> findById(Long id);
 
     VueloDTO create(VueloRequestDTO vueloRequestDTO);
 
