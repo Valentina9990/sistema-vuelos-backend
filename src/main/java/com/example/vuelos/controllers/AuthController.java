@@ -30,7 +30,16 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<User> registerUser(@RequestBody SignupRequest signupRequest) {
-        User newUser = authService.registerUser(signupRequest.username(), signupRequest.password(), signupRequest.email());
+        User newUser = authService.registerUser(
+                signupRequest.username(),
+                signupRequest.password(),
+                signupRequest.email(),
+                signupRequest.nombreCliente(),
+                signupRequest.apellidoCliente(),
+                signupRequest.direccionCliente(),
+                signupRequest.telefonoCliente(),
+                signupRequest.documentoIdentidad()
+        );
         return ResponseEntity.ok(newUser);
     }
 

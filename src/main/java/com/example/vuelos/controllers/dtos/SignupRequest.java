@@ -1,6 +1,4 @@
 package com.example.vuelos.controllers.dtos;
 
-import java.util.Set;
-
-public record SignupRequest(String username, String password, String email, Set<String> roles) {
+public record SignupRequest(String username, String password, String email, String nombreCliente, String apellidoCliente, String direccionCliente, String telefonoCliente, String documentoIdentidad) {
 }
