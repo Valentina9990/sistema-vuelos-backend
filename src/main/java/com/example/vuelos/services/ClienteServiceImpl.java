@@ -1,9 +1,6 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.controllers.dtos.ClienteDTO;
-import com.example.vuelos.controllers.dtos.ClienteMapper;
-import com.example.vuelos.controllers.dtos.ClienteRequestDTO;
-import com.example.vuelos.controllers.dtos.PasajeroDTO;
+import com.example.vuelos.controllers.dtos.*;
 import com.example.vuelos.entities.Cliente;
 import com.example.vuelos.repositories.ClienteRepository;
 import org.springframework.stereotype.Service;

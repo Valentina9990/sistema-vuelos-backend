@@ -1,8 +1,6 @@
 package com.example.vuelos.services;
 
-import com.example.vuelos.controllers.dtos.PasajeroDTO;
-import com.example.vuelos.controllers.dtos.PasajeroMapper;
-import com.example.vuelos.controllers.dtos.PasajeroRequestDTO;
+import com.example.vuelos.controllers.dtos.*;
 import com.example.vuelos.entities.Pasajero;
 import com.example.vuelos.exceptions.DuplicateDocumentException;
 import com.example.vuelos.repositories.PasajeroRepository;
@@ -47,16 +45,19 @@ public class PasajeroServiceImpl implements PasajeroService {
 
     @Override
     public Optional<PasajeroDTO> update(Long id, PasajeroRequestDTO pasajeroRequestDTO) {
-        return pasajeroRepository.findById(id).map(pasajero -> {
-            pasajeroRepository.findByDocumentoIdentidadPasajero(pasajeroRequestDTO.documentoIdentidadPasajero())
-                    .ifPresent(existingPasajero -> {
-                        if (!existingPasajero.getIdPasajero().equals(id)) {
-                            throw new DuplicateDocumentException("Ya existe otro pasajero con el documento de identidad: "
-                                    + pasajeroRequestDTO.documentoIdentidadPasajero());
-                        }
-                    });
-            return pasajeroMapper.toPasajeroDTO(pasajeroRepository.save(pasajero));
-        });
+        return pasajeroRepository.findById(id)
+                .map(pasajeroExistente -> {
+                    pasajeroRepository.findByDocumentoIdentidadPasajero(pasajeroRequestDTO.documentoIdentidadPasajero())
+                            .ifPresent(existingPasajero -> {
+                                if (!existingPasajero.getIdPasajero().equals(id)) {
+                                    throw new DuplicateDocumentException("Ya existe otro pasajero con el documento de identidad: "
+                                            + pasajeroRequestDTO.documentoIdentidadPasajero());
+                                }
+                            });
+                    pasajeroMapper.updatePasajeroFromDTO(pasajeroRequestDTO, pasajeroExistente);
+                    Pasajero pasajeroActualizado = pasajeroRepository.save(pasajeroExistente);
+                    return pasajeroMapper.toPasajeroDTO(pasajeroActualizado);
+                });
     }
 
     @Override
