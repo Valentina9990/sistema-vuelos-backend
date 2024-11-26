@@ -30,10 +30,15 @@ public class ClienteController {
                 .orElseThrow(() -> new ResourceNotFound("Cliente no encontrado con id: " + id)));
     }
 
+    @GetMapping("/documento/{documentoIdentidad}")
+    public ResponseEntity<ClienteDTO> getClienteByDocumentoIdentidad(@PathVariable String documentoIdentidad) {
+        return ResponseEntity.ok(clienteService.findByDocumentoIdentidad(documentoIdentidad)
+                .orElseThrow(() -> new ResourceNotFound("Cliente no encontrado con documento de identidad: " + documentoIdentidad)));
+    }
+
     @PostMapping
     public ResponseEntity<ClienteDTO> createCliente(@RequestBody ClienteRequestDTO clienteRequestDTO) {
-        ClienteDTO createdCliente = clienteService.create(clienteRequestDTO);
-        return ResponseEntity.ok(createdCliente);
+        return ResponseEntity.ok(clienteService.create(clienteRequestDTO));
     }
 
     @PutMapping("/{id}")

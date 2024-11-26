@@ -41,7 +41,12 @@ public class AerolineaServiceImpl implements AerolineaService {
 
     @Override
     public Optional<AerolineaDTO> update(Long id, AerolineaRequestDTO aerolineaRequestDTO) {
-        return aerolineaRepository.findById(id).map(aerolinea -> aerolineaMapper.toAerolineaDTO(aerolineaRepository.save(aerolinea)));
+        return aerolineaRepository.findById(id)
+                .map(aerolineaExistente -> {
+                    aerolineaMapper.updateAerolineaFromDTO(aerolineaRequestDTO, aerolineaExistente);
+                    Aerolinea aerolineaActualizada = aerolineaRepository.save(aerolineaExistente);
+                    return aerolineaMapper.toAerolineaDTO(aerolineaActualizada);
+                });
     }
 
     @Override
