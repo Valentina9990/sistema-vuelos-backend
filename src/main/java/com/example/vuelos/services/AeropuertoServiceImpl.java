@@ -53,8 +53,8 @@ public class AeropuertoServiceImpl implements AeropuertoService {
     }
 
     @Override
-    public Optional<AeropuertoDTO> findByNombre(String nombre) {
-        return aeropuertoRepository.findByNombreAeropuerto(nombre)
-                .map(aeropuertoMapper::toAeropuertoDTO);
+    public List<AeropuertoDTO> findByNombre(String nombre) {
+        return aeropuertoRepository.findByNombreAeropuertoContainingIgnoreCase(nombre)
+                .stream().map(aeropuertoMapper::toAeropuertoDTO).toList();
     }
 }

@@ -18,5 +18,5 @@ public interface AeropuertoService {
 
     void delete(Long id);
 
-    Optional<AeropuertoDTO> findByNombre(String nombre);
+    List<AeropuertoDTO> findByNombre(String nombre);
 }

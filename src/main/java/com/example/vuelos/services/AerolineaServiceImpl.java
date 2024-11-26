@@ -55,8 +55,8 @@ public class AerolineaServiceImpl implements AerolineaService {
     }
 
     @Override
-    public Optional<AerolineaDTO> findByAirlineCode(String code) {
-        return aerolineaRepository.findByCodigoAerolinea(code)
-                .map(aerolineaMapper::toAerolineaDTO);
+    public List<AerolineaDTO> findByAirlineCode(String code) {
+        return aerolineaRepository.findByNombreAerolineaContainingIgnoreCase(code)
+                .stream().map(aerolineaMapper::toAerolineaDTO).toList();
     }
 }

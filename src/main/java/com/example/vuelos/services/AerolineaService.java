@@ -17,5 +17,5 @@ public interface AerolineaService {
 
     void delete(Long id);
 
-    Optional<AerolineaDTO> findByAirlineCode(String code);
+    List<AerolineaDTO> findByAirlineCode(String code);
 }

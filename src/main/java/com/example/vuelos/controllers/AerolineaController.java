@@ -29,6 +29,11 @@ public class AerolineaController {
                 .orElseThrow(() -> new ResourceNotFound("Aerolínea no encontrada con id: " + id)));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<AerolineaDTO>> getAerolineaByNameOrCode(@RequestParam String param) {
+        return ResponseEntity.ok(aerolineaService.findByAirlineCode(param));
+    }
+
     @PostMapping
     public ResponseEntity<AerolineaDTO> createAerolinea(@RequestBody AerolineaRequestDTO aerolineaRequestDTO) {
         return ResponseEntity.ok(aerolineaService.create(aerolineaRequestDTO));

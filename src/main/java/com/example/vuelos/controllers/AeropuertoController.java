@@ -48,4 +48,9 @@ public class AeropuertoController {
         aeropuertoService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<AeropuertoDTO>> getAeropuertosByName(@RequestParam String name) {
+        return ResponseEntity.ok(aeropuertoService.findByNombre(name));
+    }
 }
