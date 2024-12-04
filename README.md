@@ -15,13 +15,11 @@ Este proyecto es un **sistema de gestión de vuelos** desarrollado como parte de
 
 ## ⚙️ **Tecnologías utilizadas**
 - **Backend**:  
-  - Java Spring Boot (Spring MVC, Spring Data JPA, Spring Security).
+  - Java Spring Boot (Spring Data JPA, Spring Security).
   - PostgreSQL como base de datos relacional.
 - **Contenedores**:  
   - Docker para desplegar y gestionar los servicios.
-- **Otros**:  
-  - Swagger para documentación de la API.
-  - JUnit para pruebas unitarias.
+
 
 Autores:
 Dania Sarmiento
