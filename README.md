@@ -23,5 +23,5 @@ Este proyecto es un **sistema de gestión de vuelos** desarrollado como parte de
 ---
 
 *Autores*:
-Dania Sarmiento
-Duvan Navarro
+- Dania Sarmiento
+- Duvan Navarro
