@@ -20,7 +20,8 @@ Este proyecto es un **sistema de gestión de vuelos** desarrollado como parte de
 - **Contenedores**:  
   - Docker para desplegar y gestionar los servicios.
 
+---
 
-Autores:
+*Autores*:
 Dania Sarmiento
 Duvan Navarro
